@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="mb-4">Upload File</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('upload') }}">
+                <div class="mb-3">
+                    <label for="file_name" class="form-label">File Name</label>
+                    <input type="text" class="form-control" id="file_name" name="file_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="file_size" class="form-label">File Size (optional)</label>
+                    <input type="text" class="form-control" id="file_size" name="file_size" placeholder="e.g., 2.5 MB">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="mb-4">Your Files</h2>
+    
+    {% if files %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Size</th>
+                        <th>Upload Date</th>
+                        <th>Last Modified</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files.values() %}
+                    <tr>
+                        <td>{{ file.name }}</td>
+                        <td>{{ file.size }}</td>
+                        <td>{{ file.upload_date }}</td>
+                        <td>{{ file.last_modified }}</td>
+                        <td>
+                            <a href="{{ url_for('update', filename=file.name) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{{ url_for('delete', filename=file.name) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            You don't have any files yet. <a href="{{ url_for('upload') }}" class="alert-link">Upload your first file</a>.
+        </div>
+    {% endif %}
+{% endblock %}
